@@ -9,10 +9,6 @@ const userSchema = mongoose.Schema({
     password:{
         type: String,
         require: true
-    }, 
-    email:{
-        type: String,
-        unique: true
     }
 }); 
 
