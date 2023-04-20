@@ -21,11 +21,8 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 //middleware
 app.use(express.json());
 app.use("/api", userRoutes); 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+app.use(cors({ origin: 'http://localhost:5173' }));
+
 //routes
 app.get("/", (req, res) => {
     res.send("Welcome api");
