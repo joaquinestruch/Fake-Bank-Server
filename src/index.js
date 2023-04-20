@@ -4,6 +4,11 @@ const cors = require('cors');
 
 require("dotenv").config();
 
+//middleware
+app.use(express.json());
+app.use("/api", userRoutes); 
+app.use(cors());
+
 const userRoutes = require("./routes/user");
 
 
@@ -18,15 +23,7 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
     return
 })
 
-//middleware
-app.use(express.json());
-app.use("/api", userRoutes); 
-app.use(cors({
-    origin: "*", 
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", 
-    preflightContinue: false,
-    optionsSuccessStatus: 204
-}));
+
 
 //routes
 app.get("/", (req, res) => {
