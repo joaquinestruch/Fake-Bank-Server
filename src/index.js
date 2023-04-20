@@ -21,7 +21,12 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 //middleware
 app.use(express.json());
 app.use("/api", userRoutes); 
-app.use(cors());
+app.use(cors({
+    origin: "*", 
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", 
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+}));
 
 //routes
 app.get("/", (req, res) => {
