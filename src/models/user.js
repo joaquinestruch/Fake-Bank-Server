@@ -11,10 +11,8 @@ const userSchema = mongoose.Schema({
         require: true
     }
     ,
-    email:{
-        type: String,
-        require: true,
-        unique: true
+    money:{
+        type: Number,
     }
 }); 
 
