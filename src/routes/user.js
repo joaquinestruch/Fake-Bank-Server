@@ -41,6 +41,19 @@ router.get("/users/:id", (req, res) => {
     });
 });
 
+// filter user for username and password
+router.get('/users/search/forUsername/:username/:password', (req, res) => {
+  const { username, password } = req.params;
+
+  userSchema.find({ username, password })
+    .then(users => {
+      res.json(users);
+    })
+    .catch(error => {
+      res.json({ message: error });
+    });
+});
+
 // update user
 router.put("/users/:id", (req, res) => {
   const { id } = req.params;
