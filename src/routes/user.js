@@ -42,10 +42,10 @@ router.get("/users/:id", (req, res) => {
 });
 
 // filter user for username and password
-router.get('/users/search/forUsername/:username/:password', (req, res) => {
-  const { username, password } = req.params;
+router.get('/users/search/forUsername/:name/:password', (req, res) => {
+  const { name, password } = req.params;
 
-  userSchema.find({ username, password })
+  userSchema.find({ name, password })
     .then(users => {
       res.json(users);
     })
