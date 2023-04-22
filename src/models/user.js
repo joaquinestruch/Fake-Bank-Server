@@ -12,7 +12,12 @@ const userSchema = mongoose.Schema({
     }
     ,
     money:{
-        type: String,
+        type: Number,
+        default: 1000
+    }, 
+    transaccions:{
+        type: Array, 
+        default: [] 
     }
 }); 
 
