@@ -54,12 +54,13 @@ router.get('/users/search/forUsername/:name/:password', (req, res) => {
     });
 });
 
-// update user
+
+// update array
 router.put("/users/:id", (req, res) => {
   const { id } = req.params;
-  const {name, password, email} = req.body;
+  const { transaccions } = req.body;
   userSchema
-    .updateOne({_id:id}, {$set: {name, password, email}})
+    .updateOne({_id:id}, {$push: {transaccions: transaccions}})
     .then((data) => {
       res.json(data);
     })
@@ -67,6 +68,45 @@ router.put("/users/:id", (req, res) => {
       res.json({ "message": error });
     });
 });
+
+
+// subtract money
+router.put('/users/:id/subtract', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { amount } = req.body;
+
+    const user = await userSchema.findOneAndUpdate(
+      { _id: id },
+      { $inc: { money: -amount } },
+      { new: true }
+    );
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+// add money
+router.put('/users/:id/add', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { amount } = req.body;
+
+    const user = await userSchema.findOneAndUpdate(
+      { _id: id },
+      { $inc: { money: amount } },
+      { new: true }
+    );
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 // delete user
 router.delete("/users/:id", (req, res) => {

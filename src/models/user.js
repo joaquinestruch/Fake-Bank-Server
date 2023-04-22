@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
     }, 
     transaccions:{
         type: Array, 
-        default: [] 
+        default: [],
     }
 }); 
 
