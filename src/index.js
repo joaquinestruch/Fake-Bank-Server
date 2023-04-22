@@ -35,13 +35,16 @@ app.listen(port, () => {
 })
 
 
+try{
+        const interfaces = os.networkInterfaces();
 
-const interfaces = os.networkInterfaces();
-
-for (const iface in interfaces) {
-  for (const alias of interfaces[iface]) {
-    if (alias.family === 'IPv4' && !alias.internal) {
-      console.log("IP: " + alias.address);
+    for (const iface in interfaces) {
+    for (const alias of interfaces[iface]) {
+        if (alias.family === 'IPv4' && !alias.internal) {
+        console.log("IP: " + alias.address);
+        }
     }
-  }
+    }
+}catch(error){
+    console.log("No se pudo encontrar la IP")
 }
