@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({
     }
     ,
     money:{
-        type: Number,
+        type: String,
     }
 }); 
 

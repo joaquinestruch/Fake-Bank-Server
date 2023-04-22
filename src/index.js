@@ -1,6 +1,7 @@
 const express = require("express"); 
 const mongoose = require("mongoose");
 const cors = require('cors');
+const os = require('os');
 
 require("dotenv").config();
 
@@ -32,3 +33,15 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
     console.log(`server listening ${port}`); 
 })
+
+
+
+const interfaces = os.networkInterfaces();
+
+for (const iface in interfaces) {
+  for (const alias of interfaces[iface]) {
+    if (alias.family === 'IPv4' && !alias.internal) {
+      console.log("IP: " + alias.address);
+    }
+  }
+}
