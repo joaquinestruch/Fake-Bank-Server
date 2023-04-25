@@ -14,7 +14,6 @@ const userRoutes = require("./routes/user");
 app.use(cors());
 app.use(express.json());
 app.use("/api", userRoutes); 
-
 // mongodb cconnection
 mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log("Connected to database MongoDB")
@@ -27,7 +26,11 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 
 //routes
 app.get("/", (req, res) => {
-    res.send("Welcome api");
+    res.send({
+        "API": "Fake Bank", 
+        "PORT": 3000 || process.env.PORT, 
+        "TYPE": "RESTful API"
+    })
 }); 
 
 app.listen(port, () => {
